@@ -5,9 +5,11 @@ const getUserByEmailIdAndPassword = (email: string, password: string) => {
   if (user) {
     if (isUserValid(user, password)) {
       return user;
+    } else {
+      return "Incorrect Password"
     }
   }
-  return null;
+  return "Email does not exist";
 };
 const getUserById = (id: any) => {
   let user = userModel.findById(id);

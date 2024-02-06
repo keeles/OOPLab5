@@ -6,13 +6,12 @@ const router = express.Router();
 
 declare module "express-session" {
   export interface SessionData {
-    messages: string
+    messages: string[]
   }
 }
 
 router.get("/login", forwardAuthenticated, (req, res) => {
-  const message = req.session.messages
-  console.log(message)
+  const message = req.session.messages?.pop()
   res.render("login", { message: message });
 })
 
@@ -21,7 +20,7 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
-    failureMessage: "Incorrect username or password"
+    failureMessage: true
   })
 );
 

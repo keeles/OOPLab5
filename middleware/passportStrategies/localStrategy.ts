@@ -21,13 +21,14 @@ const localStrategy = new LocalStrategy(
   },
   (email, password, done) => {
     const user = getUserByEmailIdAndPassword(email, password);
-    return user
-      ? done(null, user)
-      : done(null, false, {
-        message: "Your login details are not valid. Please try again",
+    if (typeof user === "string") {
+      done(null, false, {
+        message: user
       });
-  }
-);
+    } else {
+      done(null, user)
+    }
+  })
 
 passport.serializeUser(function (user: Express.User, done: (err: any, id?: number) => void): void {
   done(null, user.id);
