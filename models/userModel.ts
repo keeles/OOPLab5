@@ -30,12 +30,13 @@ const userModel = {
 
   createOne: (name: string, id: number) => {
     const newUser = {
-      id,
-      name,
+      id: id,
+      name: name,
       email: "",
       password: ""
     }
     database.push(newUser)
+    console.log(database)
   },
 
   findById: (id: number) => {
