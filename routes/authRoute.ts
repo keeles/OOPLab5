@@ -15,6 +15,20 @@ router.get("/login", forwardAuthenticated, (req, res) => {
   res.render("login", { message: message });
 })
 
+router.get("/github",
+  passport.authenticate('github', { scope: ['user:email'] }));
+
+router.get('/github/callback',
+  passport.authenticate('github', {
+    failureRedirect: '/auth/login',
+    successRedirect: '/dashboard'
+  }),
+  // function (req, res) {
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/dashboard');
+  // }
+);
+
 router.post(
   "/login",
   passport.authenticate("local", {

@@ -28,6 +28,16 @@ const userModel = {
     }
   },
 
+  createOne: (name: string, id: number) => {
+    const newUser = {
+      id,
+      name,
+      email: "",
+      password: ""
+    }
+    database.push(newUser)
+  },
+
   findById: (id: number) => {
     const user = database.find((user) => user.id === id);
     if (user) {
