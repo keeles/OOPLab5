@@ -7,7 +7,7 @@ import { getUserById } from "../../controllers/userController"
 import dotenv from 'dotenv'
 import { userModel } from '../../models/userModel';
 
-dotenv.config({ path: __dirname + '/.env' });
+dotenv.config({ path: __dirname + '../' + '../' + '../' + '/.env' });
 
 const githubStrategy: GitHubStrategy = new GitHubStrategy(
     {
