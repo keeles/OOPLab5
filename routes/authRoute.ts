@@ -23,10 +23,6 @@ router.get('/github/callback',
     failureRedirect: '/auth/login',
     successRedirect: '/dashboard'
   }),
-  // function (req, res) {
-  //   // Successful authentication, redirect home.
-  //   res.redirect('/dashboard');
-  // }
 );
 
 router.post(
