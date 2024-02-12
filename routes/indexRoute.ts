@@ -24,6 +24,8 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 
 router.get("/admin", ensureAdmin, async (req, res) => {
   if (req.sessionStore.all) {
+    let adminId = (req.session as any).passport
+    let admin = userModel.findById(adminId.user)?.name
     const sessionStoreAll = promisify(req.sessionStore.all.bind(req.sessionStore))
     const sessionStoreGet = promisify(req.sessionStore.get.bind(req.sessionStore))
     const sessions = await sessionStoreAll()
@@ -38,7 +40,8 @@ router.get("/admin", ensureAdmin, async (req, res) => {
       }
     }
     res.render("admin", {
-      allSessions: allSessions
+      allSessions: allSessions,
+      admin: admin
     })
   }
 })
